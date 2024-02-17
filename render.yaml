@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: airbnbclone
+    name: airbnbclone-backend
     runtime: python
     region: singapore
     buildCommand: "./build.sh"
