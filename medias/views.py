@@ -32,12 +32,12 @@ class PhotoDetail(APIView):
 class GetUploadURL(APIView):
     def post(self, request):
         url = f"https://api.cloudflare.com/client/v4/accounts/${settings.CF_ID}/images/v2/direct_upload"
-        one_time_url = requests(
+        one_time_url = requests.post(
             url,
             headers={"Authorization": f"Bearer {settings.CF_TOKEN}"},
         )
         one_time_url = one_time_url.json()
-        result = one_time_url("result")
+        result = one_time_url["result"]
         if result:
             return Response({"uploadURL": result.get("uploadURL")})
         else:
