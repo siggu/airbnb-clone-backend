@@ -235,6 +235,43 @@ class KakaoLogIn(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+class NaverLogIn(APIView):
+    def post(self, request):
+        # try:
+        code = request.data.get("code")
+        access_token = requests.post(
+            f"https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id={settings.NA_ID}&client_secret={settings.NA_SECRET}&code={code}",
+            headers={"Content-Type": "text/html;charset=utf-8"},
+        )
+        access_token = access_token.json().get("access_token")
+        user_data = requests.get(
+            f"https://openapi.naver.com/v1/nid/me",
+            headers={
+                "Authorization": f"Bearer {access_token}",
+            },
+        )
+        print(user_data.json())
+        user_data = user_data.json()["response"]
+        # try:
+        #     user = User.objects.get(email=user_data["email"])
+        #     login(request, user)
+        #     return Response(status=status.HTTP_200_OK)
+        # except User.DoesNotExist:
+        #     user = User.objects.create(
+        #         username=user_data["email"],
+        #         email=user_data["email"],
+        #         name=None,
+        #         avatar=None,
+        #     )
+        #     user.set_unusable_password()
+        #     user.save()
+        #     login(request, user)
+        #     return Response(status=status.HTTP_200_OK)
+
+    # except Exception as e:
+    #     return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class SignUp(APIView):
     def post(self, request):
         try:

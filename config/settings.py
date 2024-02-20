@@ -200,6 +200,8 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 GH_SECRET = env("GH_SECRET")
+NA_SECRET = env("NA_SECRET")
+NA_ID = env("NA_ID")
 
 CF_ID = env("CF_ID")
 CF_TOKEN = env("CF_TOKEN")
