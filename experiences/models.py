@@ -3,7 +3,6 @@ from common.models import CommonModel
 
 
 class Experience(CommonModel):
-
     """Experience Model Description"""
 
     country = models.CharField(
@@ -21,6 +20,9 @@ class Experience(CommonModel):
         "users.User",
         on_delete=models.CASCADE,
         related_name="experiences",
+    )
+    pet_friendly = models.BooleanField(
+        default=True,
     )
     price = models.PositiveIntegerField()
     address = models.CharField(
@@ -44,9 +46,21 @@ class Experience(CommonModel):
     def __str__(self):
         return self.name
 
+    def total_perks(self):
+        return self.perks.count()
+
+    def rating(experience):
+        count = experience.reviews.count()
+        if count == 0:
+            return ""
+        else:
+            total_rating = 0
+            for review in experience.reviews.all().values("rating"):
+                total_rating += review["rating"]
+            return round(total_rating / count, 3)
+
 
 class Perk(CommonModel):
-
     """What is included on an Experience"""
 
     name = models.CharField(

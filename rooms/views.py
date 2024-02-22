@@ -155,7 +155,7 @@ class RoomDetail(APIView):
                 try:
                     category = Category.objects.get(pk=category_pk)
                     if category.kind == Category.CategoryKindChoices.EXPERIENCES:
-                        raise ParseError("The category kind shoud be 'rooms'.")
+                        raise ParseError("The category kind should be 'rooms'.")
                 except Category.DoesNotExist:
                     raise ParseError("Category not found.")
             try:

@@ -3,7 +3,6 @@ from common.models import CommonModel
 
 
 class Room(CommonModel):
-
     """Room Model Definition"""
 
     class RoomKindChoices(models.TextChoices):
@@ -68,11 +67,10 @@ class Room(CommonModel):
             total_rating = 0
             for review in room.reviews.all().values("rating"):
                 total_rating += review["rating"]
-            return round(total_rating / count, 2)
+            return round(total_rating / count, 3)
 
 
 class Amenity(CommonModel):
-
     """Amenity Definition"""
 
     name = models.CharField(
