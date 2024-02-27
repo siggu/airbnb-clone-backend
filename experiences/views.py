@@ -201,7 +201,7 @@ class ExperienceReviews(APIView):
         end = start + page_size
         experience = self.get_object(pk)
         serializer = ReviewSerializer(
-            room.reviews.all()[start:end],
+            experience.reviews.all()[start:end],
             many=True,
         )
         return Response(serializer.data)
