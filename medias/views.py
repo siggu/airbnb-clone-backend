@@ -29,7 +29,7 @@ class PhotoDetail(APIView):
         return Response(status=HTTP_200_OK)
 
 
-class GetUploadURL(APIView):
+class GetRoomUploadURL(APIView):
     def post(self, request):
         url = f"https://api.cloudflare.com/client/v4/accounts/${settings.CF_ID}/images/v2/direct_upload"
         one_time_url = requests.post(
@@ -44,12 +44,39 @@ class GetUploadURL(APIView):
             return Response(
                 {
                     "id": "00000",
-                    "uploadURL": "http://127.0.0.1:8000/api/v1/medias/photos/upload-photo",
+                    "uploadURL": "http://127.0.0.1:8000/api/v1/medias/photos/upload-room-photo",
                 }
             )
 
 
-class UploadPhoto(APIView):
+class UploadRoomPhoto(APIView):
+    def post(self, request):
+        image_data = request.FILES["file"]
+        path = default_storage.save(image_data, ContentFile(image_data.read()))
+        return Response({"result": {"id": path}})
+
+
+class GetExperienceUploadURL(APIView):
+    def post(self, request):
+        url = f"https://api.cloudflare.com/client/v4/accounts/${settings.CF_ID}/images/v2/direct_upload"
+        one_time_url = requests.post(
+            url,
+            headers={"Authorization": f"Bearer {settings.CF_TOKEN}"},
+        )
+        one_time_url = one_time_url.json()
+        result = one_time_url["result"]
+        if result:
+            return Response({"uploadURL": result.get("uploadURL")})
+        else:
+            return Response(
+                {
+                    "id": "00000",
+                    "uploadURL": "http://127.0.0.1:8000/api/v1/medias/photos/upload-experience-photo",
+                }
+            )
+
+
+class UploadExperiencePhoto(APIView):
     def post(self, request):
         image_data = request.FILES["file"]
         path = default_storage.save(image_data, ContentFile(image_data.read()))

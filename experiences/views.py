@@ -244,14 +244,14 @@ class ExperiencePerks(APIView):
 class ExperiencePhotos(APIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def get_obejct(self, pk):
+    def get_object(self, pk):
         try:
             return Experience.objects.get(pk=pk)
         except Experience.DoesNotExist:
             raise NotFound
 
     def post(self, request, pk):
-        experience = self.get_obejct(pk)
+        experience = self.get_object(pk)
         if request.user != experience.host:
             raise PermissionDenied
         serializer = PhotoSerializer(data=request.data)
