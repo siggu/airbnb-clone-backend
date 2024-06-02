@@ -9,12 +9,12 @@ services:
     name: airbnbclone-backend
     runtime: python
     region: singapore
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn config.wsgi:application"
+    buildCommand: './build.sh'
+    startCommand: 'gunicorn config.wsgi:application'
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: airbnbclone
+          name: airbnbclone-db
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
