@@ -210,7 +210,7 @@ if not DEBUG:
     SESSION_COOKIE_DOMAIN = ".mokugyo.biz"
     CSRF_COOKIE_DOMAIN = ".mokugyo.biz"
     sentry_sdk.init(
-        dsn="https://fb451f3740efcc8a76955d0d7e0c034e@o4506754909667328.ingest.sentry.io/4506754911502336",
+        dsn="https://916b6669c03f55465260571f31d4ed5d@o4506754909667328.ingest.us.sentry.io/4507362002731008",
         traces_sample_rate=1.0,
         profiles_sample_rate=1.0,
     )
