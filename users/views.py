@@ -204,7 +204,7 @@ class KakaoLogIn(APIView):
                 data={
                     "grant_type": "authorization_code",
                     "client_id": "564d95aa68dfb025d4f3726ecaac2764",
-                    "redirect_uri": "http://127.0.0.1:3000/social/kakao",
+                    "redirect_uri": "https://www.mokugyo.biz/social/kakao",
                     "code": code,
                 },
             )
