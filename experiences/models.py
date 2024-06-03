@@ -52,7 +52,7 @@ class Experience(CommonModel):
     def rating(experience):
         count = experience.reviews.count()
         if count == 0:
-            return ""
+            return "No Reviews"
         else:
             total_rating = 0
             for review in experience.reviews.all().values("rating"):
