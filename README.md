@@ -1,3 +1,5 @@
+[mokugyo.biz](mokugyo.biz)
+
 1. [SET UP](#set-up)
 2. [DJANGO BASICS](#django-basics)
    <br>
